@@ -94,10 +94,10 @@ public class TableServiceImpl implements TableService {
                             .options(tableOptions)
                             .comment(tableDTO.getDescription())
                             .build();
-            if (service.tableExists(tableDTO.getDatabaseName(), tableDTO.getName())) {
-                return R.failed(Status.TABLE_NAME_IS_EXIST, tableDTO.getName());
+            if (service.tableExists(tableDTO.getDatabaseName(), tableDTO.getTableName())) {
+                return R.failed(Status.TABLE_NAME_IS_EXIST, tableDTO.getTableName());
             }
-            service.createTable(tableDTO.getDatabaseName(), tableDTO.getName(), tableMetadata);
+            service.createTable(tableDTO.getDatabaseName(), tableDTO.getTableName(), tableMetadata);
             return R.succeed();
         } catch (Exception e) {
             log.error("Exception with creating table.", e);
@@ -145,7 +145,7 @@ public class TableServiceImpl implements TableService {
                     tableChanges.add(setOption);
                 }
             }
-            service.alterTable(tableDTO.getDatabaseName(), tableDTO.getName(), tableChanges);
+            service.alterTable(tableDTO.getDatabaseName(), tableDTO.getTableName(), tableChanges);
             return R.succeed();
         } catch (Exception e) {
             log.error("Exception with adding column.", e);
@@ -218,7 +218,7 @@ public class TableServiceImpl implements TableService {
                 TableChange.SetOption setOption = TableChange.set(entry.getKey(), entry.getValue());
                 tableChanges.add(setOption);
             }
-            service.alterTable(tableDTO.getDatabaseName(), tableDTO.getName(), tableChanges);
+            service.alterTable(tableDTO.getDatabaseName(), tableDTO.getTableName(), tableChanges);
             return R.succeed();
         } catch (Exception e) {
             log.error("Exception with adding option.", e);
@@ -276,7 +276,8 @@ public class TableServiceImpl implements TableService {
         List<CatalogInfo> catalogInfoList = catalogService.list();
         PaimonService paimonService;
         for (CatalogInfo catalog : catalogInfoList) {
-            if (Objects.nonNull(tableDTO.getCatalogId())
+            if (tableDTO != null
+                    && Objects.nonNull(tableDTO.getCatalogId())
                     && Objects.nonNull(tableDTO.getDatabaseName())
                     && catalog.getId().equals(tableDTO.getCatalogId())) {
                 paimonService = PaimonServiceUtils.getPaimonService(catalog);
@@ -286,7 +287,7 @@ public class TableServiceImpl implements TableService {
                             TableVO table = new TableVO();
                             table.setCatalogId(catalog.getId());
                             table.setCatalogName(catalog.getCatalogName());
-                            table.setName(name);
+                            table.setTableName(name);
                             table.setDatabaseName(table.getDatabaseName());
                             resultList.add(table);
                         });
@@ -298,14 +299,12 @@ public class TableServiceImpl implements TableService {
                     List<String> tables = paimonService.listTables(database);
                     tables.forEach(
                             tableName -> {
-                                if (tableName.contains(tableDTO.getName())) {
-                                    TableVO table = new TableVO();
-                                    table.setCatalogId(catalog.getId());
-                                    table.setCatalogName(catalog.getCatalogName());
-                                    table.setDatabaseName(database);
-                                    table.setName(tableName);
-                                    resultList.add(table);
-                                }
+                                TableVO table = new TableVO();
+                                table.setCatalogId(catalog.getId());
+                                table.setCatalogName(catalog.getCatalogName());
+                                table.setDatabaseName(database);
+                                table.setTableName(tableName);
+                                resultList.add(table);
                             });
                 }
             }

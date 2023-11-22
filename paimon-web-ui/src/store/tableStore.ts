@@ -62,6 +62,7 @@ export const useTableStore = create<Store>((set) => ({
         try {
             const result = await Api.getAllTables();
             if (result && result.data) {
+                debugger
                 const newTableItemList = result.data.map((item) => {
                     return {
                         catalogName: item.catalogName,
@@ -73,6 +74,7 @@ export const useTableStore = create<Store>((set) => ({
                         tableOptions: item.tableOptions,
                     };
                 });
+                
                 set((state) => ({ ...state, tableItemList: newTableItemList }));
             }
         } catch (error) {

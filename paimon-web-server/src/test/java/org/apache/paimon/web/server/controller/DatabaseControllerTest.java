@@ -49,7 +49,7 @@ public class DatabaseControllerTest extends ControllerTestBase {
     @Test
     public void testCreateDatabase() throws Exception {
         DatabaseDTO database = new DatabaseDTO();
-        database.setName(databaseName);
+        database.setDatabaseName(databaseName);
         database.setCatalogName(catalogName);
         database.setCatalogId(catalogId);
         database.setIgnoreIfExists(true);

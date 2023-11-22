@@ -105,8 +105,8 @@ public class ControllerTestBase {
 
         // create default catalog
         CatalogDTO catalog = new CatalogDTO();
-        catalog.setType("filesystem");
-        catalog.setName(catalogName);
+        catalog.setCatalogType("filesystem");
+        catalog.setCatalogName(catalogName);
         catalog.setWarehouse(tempFile.toUri().toString());
         catalog.setDelete(false);
 
@@ -120,7 +120,7 @@ public class ControllerTestBase {
         // create default database
         DatabaseDTO database = new DatabaseDTO();
         database.setCatalogId(catalogId);
-        database.setName(databaseName);
+        database.setDatabaseName(databaseName);
         database.setCatalogName(catalogName);
 
         mockMvc.perform(
@@ -143,7 +143,7 @@ public class ControllerTestBase {
                 TableDTO.builder()
                         .catalogName(catalogName)
                         .databaseName(databaseName)
-                        .name(tableName)
+                        .tableName(tableName)
                         .tableColumns(tableColumns)
                         .partitionKey(Lists.newArrayList())
                         .tableOptions(Maps.newHashMap())

@@ -50,7 +50,9 @@ export const useDatabaseStore = create<Store>((set) => ({
         try {
             const result = await Api.getAllDatabases();
             if (result && result.data) {
-                const newDatabaseItemList = result.data.map((item) => {
+                const newDatabaseItemList :any= []
+                 result.data.forEach((item) => {
+                    newDatabaseItemList.push(item)
                     return {
                         databaseName: item.databaseName,
                         catalogId: item.catalogId,

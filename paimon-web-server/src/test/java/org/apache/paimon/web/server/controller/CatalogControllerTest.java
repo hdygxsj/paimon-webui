@@ -51,8 +51,8 @@ public class CatalogControllerTest extends ControllerTestBase {
     @Test
     public void testCreateCatalog() throws Exception {
         CatalogDTO catalog = new CatalogDTO();
-        catalog.setType("filesystem");
-        catalog.setName(catalogName);
+        catalog.setCatalogType("filesystem");
+        catalog.setCatalogName(catalogName);
         catalog.setWarehouse(tempFile.toUri().toString());
         catalog.setDelete(false);
 
@@ -74,7 +74,7 @@ public class CatalogControllerTest extends ControllerTestBase {
 
         CatalogDTO removeCatalog = new CatalogDTO();
         removeCatalog.setId(1);
-        removeCatalog.setName(catalogName);
+        removeCatalog.setCatalogName(catalogName);
 
         mockMvc.perform(
                         MockMvcRequestBuilders.post(catalogPath + "/remove")

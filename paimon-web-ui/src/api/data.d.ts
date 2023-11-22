@@ -36,6 +36,7 @@ declare namespace Prop {
     // Catalog
     export interface CatalogProp {
         catalogName: string,
+        type: string,
         catalogType: string,
         warehouse: string,
         hiveUri: string,

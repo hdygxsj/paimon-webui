@@ -40,29 +40,31 @@ public class CatalogServiceImpl extends ServiceImpl<CatalogMapper, CatalogInfo>
     @Override
     public boolean checkCatalogNameUnique(CatalogDTO catalogDTO) {
         CatalogInfo info =
-                this.lambdaQuery().eq(CatalogInfo::getCatalogName, catalogDTO.getName()).one();
+                this.lambdaQuery()
+                        .eq(CatalogInfo::getCatalogName, catalogDTO.getCatalogName())
+                        .one();
         return Objects.nonNull(info);
     }
 
     @Override
     public R<Void> createCatalog(CatalogDTO catalogDTO) {
         if (checkCatalogNameUnique(catalogDTO)) {
-            return R.failed(Status.CATALOG_NAME_IS_EXIST, catalogDTO.getName());
+            return R.failed(Status.CATALOG_NAME_IS_EXIST, catalogDTO.getCatalogName());
         }
 
-        if (catalogDTO.getType().equalsIgnoreCase(CatalogMode.FILESYSTEM.getMode())) {
+        if (catalogDTO.getCatalogType().equalsIgnoreCase(CatalogMode.FILESYSTEM.getMode())) {
             PaimonServiceFactory.createFileSystemCatalogService(
-                    catalogDTO.getName(), catalogDTO.getWarehouse());
-        } else if (catalogDTO.getType().equalsIgnoreCase(CatalogMode.HIVE.getMode())) {
+                    catalogDTO.getCatalogName(), catalogDTO.getWarehouse());
+        } else if (catalogDTO.getCatalogType().equalsIgnoreCase(CatalogMode.HIVE.getMode())) {
             if (StringUtils.isNotBlank(catalogDTO.getHiveConfDir())) {
                 PaimonServiceFactory.createHiveCatalogService(
-                        catalogDTO.getName(),
+                        catalogDTO.getCatalogName(),
                         catalogDTO.getWarehouse(),
                         catalogDTO.getHiveUri(),
                         catalogDTO.getHiveConfDir());
             } else {
                 PaimonServiceFactory.createHiveCatalogService(
-                        catalogDTO.getName(),
+                        catalogDTO.getCatalogName(),
                         catalogDTO.getWarehouse(),
                         catalogDTO.getHiveUri(),
                         null);
@@ -71,8 +73,8 @@ public class CatalogServiceImpl extends ServiceImpl<CatalogMapper, CatalogInfo>
 
         CatalogInfo catalog =
                 CatalogInfo.builder()
-                        .catalogName(catalogDTO.getName())
-                        .catalogType(catalogDTO.getType())
+                        .catalogName(catalogDTO.getCatalogName())
+                        .catalogType(catalogDTO.getCatalogType())
                         .hiveUri(catalogDTO.getHiveUri())
                         .warehouse(catalogDTO.getWarehouse())
                         .isDelete(false)

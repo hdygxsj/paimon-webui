@@ -24,7 +24,7 @@ import lombok.Data;
 @Data
 public class DatabaseDTO {
 
-    private String name;
+    private String databaseName;
 
     private Integer catalogId;
 

@@ -34,5 +34,5 @@ public class TableVO {
 
     private String databaseName;
 
-    private String name;
+    private String tableName;
 }

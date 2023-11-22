@@ -22,17 +22,9 @@ import {CatalogItemList} from "@src/types/Catalog/data";
 import {DatabaseItem} from "@src/types/Database/data";
 import {TableItem} from "@src/types/Table/data";
 
-export const createFileSystemCatalog = async (catalogProp: Prop.CatalogProp) => {
+export const createCatalog = async (catalogProp: Prop.CatalogProp) => {
     try {
-        return await http.httpPost<Result<any>, Prop.CatalogProp>(API_ENDPOINTS.CREATE_FILE_SYSTEM_CATALOG, catalogProp);
-    } catch (error) {
-        console.error('Failed to create catalog:', error);
-    }
-};
-
-export const createHiveCatalog = async (catalogProp: Prop.CatalogProp) => {
-    try {
-        return await http.httpPost<Result<any>, Prop.CatalogProp>(API_ENDPOINTS.CREATE_HIVE_CATALOG, catalogProp);
+        return await http.httpPost<Result<any>, Prop.CatalogProp>(API_ENDPOINTS.CRATE_CATALOG, catalogProp);
     } catch (error) {
         console.error('Failed to create catalog:', error);
     }
@@ -64,6 +56,7 @@ export const getAllDatabases = async () => {
 
 export const createTable = async (databaseProp: TableItem) => {
     try {
+        debugger
         return await http.httpPost<Result<any>, TableItem>(API_ENDPOINTS.CREATE_TABLE, databaseProp);
     } catch (error) {
         console.error('Failed to create table:', error);
@@ -72,15 +65,14 @@ export const createTable = async (databaseProp: TableItem) => {
 
 export const getAllTables = async () => {
     try {
-        return await http.httpGet<Result<TableItem[]>, null>(API_ENDPOINTS.GET_ALL_TABLES)
+        return await http.httpPost<Result<TableItem[]>, any>(API_ENDPOINTS.GET_ALL_TABLES,{})
     } catch (error: any) {
         console.error('Failed to get tables:', error);
     }
 }
 
 const Api = {
-    createFileSystemCatalog,
-    createHiveCatalog,
+    createCatalog,
     getAllCatalogs,
     createDatabase,
     getAllDatabases,

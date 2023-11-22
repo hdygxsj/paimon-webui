@@ -35,10 +35,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 /** Table api controller. */
 @Slf4j
@@ -192,20 +188,8 @@ public class TableController {
      * @return Response object containing a list of {@link TableVO} representing the tables.
      */
     @PostMapping("/list")
-    public R<Object> listTables(@RequestBody TableDTO tableDTO) {
+    public R<Object> listTables(@RequestBody(required = false) TableDTO tableDTO) {
         List<TableVO> tables = tableService.listTables(tableDTO);
-        if (Objects.nonNull(tableDTO.getCatalogId())
-                && Objects.nonNull(tableDTO.getDatabaseName())) {
-            return R.succeed(tables);
-        } else {
-            TreeMap<Integer, Map<String, List<TableVO>>> collect =
-                    tables.stream()
-                            .collect(
-                                    Collectors.groupingBy(
-                                            TableVO::getCatalogId,
-                                            TreeMap::new,
-                                            Collectors.groupingBy(TableVO::getDatabaseName)));
-            return R.succeed(collect);
-        }
+        return R.succeed(tables);
     }
 }

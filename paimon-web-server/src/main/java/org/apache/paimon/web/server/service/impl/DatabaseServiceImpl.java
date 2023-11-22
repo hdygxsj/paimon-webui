@@ -60,11 +60,11 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseMapper, DatabaseVO>
         try {
             CatalogInfo catalogInfo = getCatalogInfo(databaseDTO);
             PaimonService service = PaimonServiceUtils.getPaimonService(catalogInfo);
-            if (service.databaseExists(databaseDTO.getName())) {
-                return R.failed(Status.DATABASE_NAME_IS_EXIST, databaseDTO.getName());
+            if (service.databaseExists(databaseDTO.getDatabaseName())) {
+                return R.failed(Status.DATABASE_NAME_IS_EXIST, databaseDTO.getDatabaseName());
             }
             service.createDatabase(
-                    databaseDTO.getName(),
+                    databaseDTO.getDatabaseName(),
                     BooleanUtils.toBooleanDefaultIfNull(databaseDTO.isIgnoreIfExists(), false));
             return R.succeed();
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseMapper, DatabaseVO>
             databases.forEach(
                     databaseName -> {
                         DatabaseVO database = new DatabaseVO();
-                        database.setName(databaseName);
+                        database.setDatabaseName(databaseName);
                         database.setCatalogId(catalog.getId());
                         database.setCatalogName(catalog.getCatalogName());
                         database.setDescription("");
@@ -101,7 +101,7 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseMapper, DatabaseVO>
                                     databaseName -> {
                                         DatabaseVO info =
                                                 DatabaseVO.builder()
-                                                        .name(databaseName)
+                                                        .databaseName(databaseName)
                                                         .catalogId(item.getId())
                                                         .catalogName(item.getCatalogName())
                                                         .description("")
@@ -120,7 +120,7 @@ public class DatabaseServiceImpl extends ServiceImpl<DatabaseMapper, DatabaseVO>
             CatalogInfo catalogInfo = getCatalogInfo(databaseDTO);
             PaimonService service = PaimonServiceUtils.getPaimonService(catalogInfo);
             service.dropDatabase(
-                    databaseDTO.getName(),
+                    databaseDTO.getDatabaseName(),
                     BooleanUtils.toBooleanDefaultIfNull(databaseDTO.isIgnoreIfExists(), false),
                     BooleanUtils.toBooleanDefaultIfNull(databaseDTO.isCascade(), true));
             return R.succeed();

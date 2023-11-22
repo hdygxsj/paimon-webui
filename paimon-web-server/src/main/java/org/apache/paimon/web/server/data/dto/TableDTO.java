@@ -41,7 +41,7 @@ public class TableDTO {
 
     private String databaseName;
 
-    private String name;
+    private String tableName;
 
     private String description;
 

@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DatabaseVO {
 
-    private String name;
+    private String databaseName;
 
     private Integer catalogId;
 

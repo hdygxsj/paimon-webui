@@ -68,7 +68,7 @@ public class TableControllerTest extends ControllerTestBase {
                 TableDTO.builder()
                         .catalogName(catalogName)
                         .databaseName(databaseName)
-                        .name(tableName)
+                        .tableName(tableName)
                         .tableColumns(tableColumns)
                         .partitionKey(Lists.newArrayList())
                         .tableOptions(Maps.newHashMap())
@@ -119,7 +119,7 @@ public class TableControllerTest extends ControllerTestBase {
                 TableDTO.builder()
                         .catalogName(catalogName)
                         .databaseName(databaseName)
-                        .name(tableName)
+                        .tableName(tableName)
                         .tableColumns(tableColumns)
                         .partitionKey(Lists.newArrayList())
                         .tableOptions(Maps.newHashMap())
@@ -211,7 +211,7 @@ public class TableControllerTest extends ControllerTestBase {
                 TableDTO.builder()
                         .catalogName(catalogName)
                         .databaseName(databaseName)
-                        .name(tableName)
+                        .tableName(tableName)
                         .tableColumns(Lists.newArrayList())
                         .partitionKey(Lists.newArrayList())
                         .tableOptions(option)
@@ -270,7 +270,7 @@ public class TableControllerTest extends ControllerTestBase {
                 TableDTO.builder()
                         .catalogName(catalogName)
                         .databaseName(databaseName)
-                        .name("test_table_01")
+                        .tableName("test_table_01")
                         .tableColumns(tableColumns)
                         .partitionKey(Lists.newArrayList())
                         .tableOptions(Maps.newHashMap())
@@ -307,7 +307,7 @@ public class TableControllerTest extends ControllerTestBase {
     @Test
     public void testListTables() throws Exception {
         TableDTO table = new TableDTO();
-        table.setName(tableName);
+        table.setTableName(tableName);
         //        table.setCatalogId(catalogId);
         //        table.setDatabaseName(databaseName);
         String responseString =

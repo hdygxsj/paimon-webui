@@ -23,34 +23,16 @@ import {Toast} from "@douyinfe/semi-ui";
 
 type Store = {
     catalogItemList: CatalogItemList;
-    createFileSystemCatalog: (catalogProp: Prop.CatalogProp) => Promise<void>;
-    createHiveCatalog: (catalogProp: Prop.CatalogProp) => Promise<void>;
+    createCatalog: (catalogProp: Prop.CatalogProp) => Promise<void>;
     fetchCatalogData: () => Promise<void>;
 };
 
 export const useCatalogStore = create<Store>()(persist(
     (set) => ({
         catalogItemList: [],
-        createFileSystemCatalog: async (catalogProp) => {
+        createCatalog: async (catalogProp) => {
             try {
-                const response = await Api.createFileSystemCatalog(catalogProp);
-                if (!response) {
-                    throw new Error('No response from createFileSystemCatalog');
-                }
-                if (response.code === 200) {
-                    Toast.success('Catalog created successfully!');
-                } else {
-                    console.error('Failed to create catalog:', response.msg);
-                    Toast.error('Failed to create catalog:' +  response.msg);
-                }
-            } catch (error) {
-                console.error('Failed to create catalog:', error);
-                Toast.error('Failed to create catalog:' + error);
-            }
-        },
-        createHiveCatalog: async (catalogProp) => {
-            try {
-                const response = await Api.createHiveCatalog(catalogProp);
+                const response = await Api.createCatalog(catalogProp);
                 if (!response) {
                     throw new Error('No response from createFileSystemCatalog');
                 }

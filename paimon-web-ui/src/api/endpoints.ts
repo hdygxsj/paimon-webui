@@ -22,16 +22,15 @@ export const API_ENDPOINTS = {
     LOGIN: '/login',
 
     // catalog
-    CREATE_FILE_SYSTEM_CATALOG: '/catalog/createFilesystemCatalog',
-    CREATE_HIVE_CATALOG: '/catalog/createHiveCatalog',
-    GET_ALL_CATALOGS: '/catalog/getAllCatalogs',
+    CRATE_CATALOG: '/catalog/create',
+    GET_ALL_CATALOGS: '/catalog/list',
 
     // database
-    CREATE_DATABASE: '/database/createDatabase',
-    GET_ALL_DATABASES: '/database/getAllDatabases',
+    CREATE_DATABASE: '/database/create',
+    GET_ALL_DATABASES: '/database/list',
 
     // table
-    CREATE_TABLE: '/table/createTable',
-    GET_ALL_TABLES: '/table/getAllTables',
+    CREATE_TABLE: '/table/create',
+    GET_ALL_TABLES: '/table/list',
 
 };

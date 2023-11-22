@@ -19,17 +19,16 @@ import { IconPlus } from "@douyinfe/semi-icons";
 import CatalogTree from "@pages/Metadata/components/LeftContent/components/CatalogTree";
 import { useState } from "react";
 import CatalogModalForm from "@pages/Metadata/components/LeftContent/components/CatalogModalForm";
-import {useCatalogStore} from "@src/store/catalogStore.ts";
+import { useCatalogStore } from "@src/store/catalogStore.ts";
 import styles from "./left-content.module.less";
 import { useTranslation } from 'react-i18next';
-import {useDatabaseStore} from "@src/store/databaseStore.ts";
+import { useDatabaseStore } from "@src/store/databaseStore.ts";
 
 
 const MetadataSidebar = () => {
 
     const [showModal, setShowModal] = useState(false);
-    const createFilesystemCatalog = useCatalogStore(state => state.createFileSystemCatalog);
-    const createHiveCatalog = useCatalogStore(state => state.createHiveCatalog);
+    const createCatalog = useCatalogStore(state => state.createCatalog);
     const fetchCatalogData = useCatalogStore(state => state.fetchCatalogData);
     const fetchAllDatabases = useDatabaseStore(state => state.fetchDatabases);
 
@@ -52,27 +51,18 @@ const MetadataSidebar = () => {
                     const catalogProp: Prop.CatalogProp = {
                         catalogName: formData.catalogName,
                         catalogType: formData.catalogType,
+                        type: formData.type,
                         warehouse: formData.warehouse,
                         hiveUri: formData.hiveUri,
                         hiveConfDir: formData.hiveConfDir,
                         isDelete: false
                     };
-
-                    if (formData.catalogType === 'filesystem') {
-                        createFilesystemCatalog(catalogProp)
-                            .then(() => {
-                                fetchCatalogData();
-                                fetchAllDatabases();
-                                resolve();
-                            })
-                    } else {
-                        createHiveCatalog(catalogProp)
-                            .then(() => {
-                                fetchCatalogData();
-                                fetchAllDatabases();
-                                resolve();
-                            })
-                    }
+                    createCatalog(catalogProp)
+                        .then(() => {
+                            fetchCatalogData();
+                            fetchAllDatabases();
+                            resolve();
+                        })
                     resolve();
                 })
                 .catch((errors: any) => {
@@ -83,15 +73,15 @@ const MetadataSidebar = () => {
     };
 
     const { t } = useTranslation()
-    return(
+    return (
         <div className={styles.container}>
             <div className={styles['add-catalog-container']}>
                 <span>{t('metadata.catalog')}</span>
-                <IconPlus className={styles.iconPlus}  onClick={handleOpenModal}/>
+                <IconPlus className={styles.iconPlus} onClick={handleOpenModal} />
             </div>
-            <CatalogTree/>
+            <CatalogTree />
             {showModal && (
-                <CatalogModalForm visible={showModal} onClose={handleCloseModal} onOk={handleOk}/>
+                <CatalogModalForm visible={showModal} onClose={handleCloseModal} onOk={handleOk} />
             )}
         </div>
     )
