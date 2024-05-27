@@ -59,6 +59,8 @@ public class CdcJobDefinitionServiceImpl
         extends ServiceImpl<CdcJobDefinitionMapper, CdcJobDefinition>
         implements CdcJobDefinitionService {
 
+
+
     @Autowired private CatalogService catalogService;
 
     @Override
