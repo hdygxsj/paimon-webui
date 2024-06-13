@@ -18,17 +18,16 @@
 
 package org.apache.paimon.web.server.controller;
 
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-/** PaimonWebErrorController. */
+/** PaimonWebUiForwardController. */
 @Controller
-public class PaimonWebForwardController implements ErrorController {
+public class PaimonWebUiForwardController {
 
-    @GetMapping(value = "/**/{[path:[^\\.]*}")
+    @GetMapping(value = "/ui/{[path:[^\\.]*}")
     public ModelAndView forwardToIndex() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setStatus(HttpStatus.OK);
