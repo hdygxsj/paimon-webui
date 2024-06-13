@@ -31,10 +31,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
-/** Test for {@link PaimonWebErrorController}. */
+/** Test for {@link PaimonWebForwardController}. */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PaimonWebErrorControllerTest extends ControllerTestBase {
+public class PaimonWebForwardControllerTest extends ControllerTestBase {
 
     @MockBean private HttpServletRequest request;
 

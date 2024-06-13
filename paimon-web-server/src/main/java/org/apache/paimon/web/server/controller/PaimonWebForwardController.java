@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /** PaimonWebErrorController. */
 @Controller
-public class PaimonWebErrorController implements ErrorController {
+public class PaimonWebForwardController implements ErrorController {
 
     @GetMapping(value = "/**/{[path:[^\\.]*}")
     public ModelAndView forwardToIndex() {
