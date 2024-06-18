@@ -40,5 +40,13 @@
             <directory>${basedir}/release-docs</directory>
             <outputDirectory>.</outputDirectory>
         </fileSet>
+        <fileSet>
+            <directory>${basedir}/../paimon-web-plugin/</directory>
+            <includes>
+                <include >**/paimon-web-plugin-cryptography-sm-${project.version}.jar</include>
+            </includes>
+            <useDefaultExcludes>false</useDefaultExcludes>
+            <outputDirectory>./plugin/</outputDirectory>
+        </fileSet>
     </fileSets>
 </assembly>

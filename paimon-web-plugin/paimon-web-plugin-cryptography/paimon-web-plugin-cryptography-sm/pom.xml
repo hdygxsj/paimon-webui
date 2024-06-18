@@ -38,6 +38,7 @@ under the License.
             <groupId>org.apache.paimon</groupId>
             <artifactId>paimon-web-plugin-cryptography-api</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -46,6 +47,7 @@ under the License.
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -83,11 +85,6 @@ under the License.
                                     <include>*:*</include>
                                 </includes>
                             </artifactSet>
-                            <transformers combine.children="append">
-                                <!-- The service transformer is needed to merge META-INF/services files -->
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                            </transformers>
                         </configuration>
                     </execution>
                 </executions>
