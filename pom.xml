@@ -462,6 +462,20 @@ under the License.
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
                     <version>${maven-shade-plugin.version}</version>
+                    <configuration>
+                        <transformers combine.children="append">
+                            <!-- The service transformer is needed to merge META-INF/services files -->
+                            <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            <!-- The ApacheNoticeResourceTransformer collects and aggregates NOTICE files -->
+                            <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
+                                <projectName>Apache Paimon</projectName>
+                                <inceptionYear>${project.inceptionYear}</inceptionYear>
+                                <encoding>UTF-8</encoding>
+                            </transformer>
+                        </transformers>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>com.diffplug.spotless</groupId>
