@@ -87,8 +87,11 @@ under the License.
                             </artifactSet>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
-                                    <addHeader>true</addHeader>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
+                                    <projectName>Apache Paimon Web</projectName>
+                                    <inceptionYear>${project.inceptionYear}</inceptionYear>
+                                    <encoding>UTF-8</encoding>
                                 </transformer>
                             </transformers>
                         </configuration>
