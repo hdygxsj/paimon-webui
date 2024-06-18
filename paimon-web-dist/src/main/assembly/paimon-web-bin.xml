@@ -43,8 +43,11 @@
         <fileSet>
             <directory>${basedir}/../paimon-web-plugin/</directory>
             <includes>
-                <include >**/paimon-web-plugin-cryptography-sm-${project.version}.jar</include>
+                <include>**/paimon-web-plugin-cryptography-*-${project.version}.jar</include>
             </includes>
+            <excludes>
+                <exclude>**/paimon-web-plugin-cryptography-api-${project.version}.jar</exclude>
+            </excludes>
             <useDefaultExcludes>false</useDefaultExcludes>
             <outputDirectory>./plugin/</outputDirectory>
         </fileSet>
