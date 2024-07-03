@@ -85,9 +85,13 @@ under the License.
                         <configuration>
                             <shadeTestJar>true</shadeTestJar>
                             <shadedArtifactAttached>false</shadedArtifactAttached>
-                            <createDependencyReducedPom>true</createDependencyReducedPom>                      <filters combine.children="append">
+                            <createDependencyReducedPom>true</createDependencyReducedPom>
+                            <filters combine.children="append">
                                 <filter>
                                     <artifact>*</artifact>
+                                    <excludes>
+                                        <exclude>NOTICE</exclude>
+                                    </excludes>
                                 </filter>
                             </filters>
                             <artifactSet>
