@@ -262,7 +262,7 @@ under the License.
             <groupId>org.apache.paimon</groupId>
             <artifactId>paimon-web-plugin-cryptography-sm</artifactId>
             <version>${project.version}</version>
-            <scope>test</scope>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

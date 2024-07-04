@@ -6,3 +6,12 @@ The Apache Software Foundation (http://www.apache.org/).
 
 Apache Flink
 Copyright 2014-2023 The Apache Software Foundation
+
+This product optionally depends on 'Bouncy Castle Crypto APIs' to generate
+a temporary self-signed X.509 certificate when the JVM does not provide the
+equivalent functionality.  It can be obtained at:
+
+  * LICENSE:
+    * license/LICENSE.bouncycastle.txt (MIT License)
+  * HOMEPAGE:
+    * http://www.bouncycastle.org/

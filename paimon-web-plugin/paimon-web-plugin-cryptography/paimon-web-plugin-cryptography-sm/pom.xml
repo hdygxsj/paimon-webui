@@ -42,7 +42,7 @@ under the License.
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15to18</artifactId>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
