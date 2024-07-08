@@ -48,7 +48,7 @@ under the License.
         <dependency>
             <groupId>org.apache.paimon</groupId>
             <artifactId>paimon-web-common</artifactId>
-            <version>${project.version}</version>
+            <version>0.2-SNAPSHOT</version>
         </dependency>
 
         <dependency>
