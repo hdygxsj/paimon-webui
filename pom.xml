@@ -374,6 +374,8 @@ under the License.
                         <exclude>paimon-web-ui/node_modules/**</exclude>
                         <exclude>paimon-web-ui/dist/**</exclude>
                         <exclude>paimon-web-ui/licenses/**</exclude>
+                        <exclude>paimon-web-ui/node/**</exclude>
+                        <exclude>**/dependency-reduced-pom.xml</exclude>
                     </excludes>
                 </configuration>
             </plugin>
